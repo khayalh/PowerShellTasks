@@ -1,10 +1,10 @@
 param(
     [Parameter(Mandatory=$true)]
-    [string]$FilePath,
+    [string]$JsonFilePath,
     [Parameter(Mandatory=$true)]
     [string]$keyOrValue
 )
-$json=Get-Content $FilePath | ConvertFrom-Json
+$json=Get-Content $JsonFilePath | ConvertFrom-Json
 for($i=0;$i -lt $json.Count;$i++) {$json[$i]| Where-Object {$_ -like "*$keyOrValue*"} |  ForEach-Object {
     echo ""
     Write-Host RgName "=" $_.RgName 

@@ -1,0 +1,1 @@
+Create script using switch parameter. If parameter is true execute get-disk cmdlet.

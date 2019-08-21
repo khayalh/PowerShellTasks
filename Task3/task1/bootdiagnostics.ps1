@@ -7,24 +7,16 @@ param (
     [string]$logsPath
 )
 $saname = (Get-AzureRmStorageAccount -ResourceGroupName $resourceGroupName).StorageAccountName
-$vm = Get-AzureRmVM `
-    -ResourceGroupName $resourceGroupName `
-    -Name $vmname
+$vm = Get-AzureRmVM -ResourceGroupName $resourceGroupName -Name $vmname
 Set-AzureRmVMBootDiagnostics `
     -VM $vm `
     -Enable `
     -ResourceGroupName $resourceGroupName `
     -StorageAccountName $saname
-$connection = (Get-AzureRmStorageAccount `
-    -ResourceGroupName $resourceGroupName `
-    -Name $saname).Context.ConnectionString
+$connection = (Get-AzureRmStorageAccount -ResourceGroupName $resourceGroupName -Name $saname).Context.ConnectionString
 $context = New-AzureStorageContext -ConnectionString $connection 
-$containername = (Get-AzureStorageContainer `
-    -Name *bootdiagnostics* `
-    -Context $context).Name
-$blobs = Get-AzureStorageblob `
-    -Container $containername `
-    -Context $context 
+$containername = (Get-AzureStorageContainer -Name *bootdiagnostics* -Context $context).Name
+$blobs = Get-AzureStorageblob -Container $containername -Context $context 
 New-item -ItemType Directory -Path $logspath
 foreach ($blob in $blobs) {   
     Get-AzureStorageBlobContent `

@@ -1,6 +1,6 @@
-function Replace ([string]$Path, [string]$firstValue, [string]$secondValue) {
+function Replace ([string]$Path, [string]$FirstValue, [string]$ChangeFirstValueTo, [string]$SecondValue, $ChangeSecondValueTo) {
     (get-content $Path) |
-    ForEach-Object {$_.Replace("$firstValue", "Hesenov")} |
-    ForEach-Object {$_.Replace("$secondValue","07.09.1995")} |
+    ForEach-Object {$_.Replace("$FirstValue", "$ChangeFirstValueTo")} |
+    ForEach-Object {$_.Replace("$SecondValue","$ChangeSecondValueTo")} |
     Set-Content $Path
 }

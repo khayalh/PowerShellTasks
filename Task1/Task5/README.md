@@ -1,0 +1,1 @@
+Check that variable is undefined then, set new value and print out, "elif" print out value (Check for both Null and Empty variable).

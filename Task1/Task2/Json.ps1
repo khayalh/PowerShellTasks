@@ -1,3 +1,9 @@
+param(
+  [Parameter(Mandatory = $true)]
+  [string]$jsonfilepath,
+  [Parameter(Mandatory = $true)]
+  [string]$changedjsonfilepath
+)
 $json=@"
 {
     "glossary": {
@@ -23,8 +29,8 @@ $json=@"
    }
    
 "@
-$json | Out-File "C:\Scripts\Task2\json.json"
-$json= get-content "C:\Scripts\Task2\json.json" | ConvertFrom-Json
+$json | Out-File $jsonfilepath
+$json= get-content $jsonfilepath | ConvertFrom-Json
 $atribs=$json.glossary.GlossDiv.GlossList.GlossEntry
 foreach($atrib in $atribs) {$atribs.SortAs= 'OMPL'}
-$json |ConvertTo-Json -Depth 100 | Out-File -FilePath C:\Scripts\Task2\jsonchanged.json
+$json |ConvertTo-Json -Depth 100 | Out-File -FilePath $changedjsonfilepath

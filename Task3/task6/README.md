@@ -1,0 +1,1 @@
+Write a function that takes the first parameter as the path to the file, the second and third parameters as a string and changes certain lines within this file with the value of the second and third parameters.

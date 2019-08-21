@@ -1,3 +1,9 @@
+param(
+  [Parameter(Mandatory = $true)]
+  [string]$xmlfilepath,
+  [Parameter(Mandatory = $true)]
+  [string]$changedxmlpath
+)
 $xml=[xml]@"
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0"
@@ -25,14 +31,14 @@ xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
 
 "@
 Write-Output $xml
-$xml.Save("C:\Scripts\Task1\xmlmain.xml")
+$xml.Save($xmlfilepath)
 for ($a = 0; $a -lt 26; $a++) 
 {[char](65+$a)
 $b=([char](65+$a))
-$filePathToTask = "C:\Scripts\Task1\xmlmain.xml"
+$filePathToTask = $xmlfilepath
 $xml=New-Object xml
 $xml.Load($filePathToTask)
 $element =  $xml.SelectSingleNode("//th")
 $element.InnerText = "$b"
-$xml.Save("C:\Scripts\Task1\xmlfolder\xml$b.xml")
+$xml.Save("$changedxmlpath\xml$b.xml")
 }

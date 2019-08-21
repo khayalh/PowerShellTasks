@@ -1,0 +1,1 @@
+Create PowerShell script to import pfx certificate with a password to the 'cert:\LocalMachine\My' location and get thumbprint for this certificate.
